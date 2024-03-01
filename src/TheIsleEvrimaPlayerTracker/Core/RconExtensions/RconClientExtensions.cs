@@ -13,6 +13,7 @@ namespace TheIsleEvrimaPlayerTracker.Core.RconExtensions
             var lines = response.Replace(",", string.Empty)
                                 .Split("\n")
                                 .Skip(1)
+                                .Where(x => !string.IsNullOrWhiteSpace(x))
                                 .ToArray();
 
             for (int i = 0; i < lines.Length; i = i + 2)

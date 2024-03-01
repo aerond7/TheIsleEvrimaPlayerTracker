@@ -26,44 +26,54 @@ namespace TheIsleEvrimaPlayerTracker.Core
 
             _tracking = true;
 
-            using (var rcon = new EvrimaRconClient(trackerConfig.RconHost, trackerConfig.RconPort, trackerConfig.RconPassword, trackerConfig.RconTimeout))
+            Logging.WriteLine($"RCON will connect to {trackerConfig.RconHost}:{trackerConfig.RconPort}");
+
+            Logging.WriteLine("Connecting to Discord bot...");
+            try
             {
-                Logging.WriteLine($"Connecting to RCON at {trackerConfig.RconHost}:{trackerConfig.RconPort}");
-                if (!await rcon.ConnectAsync())
-                {
-                    Logging.WriteLine("Connection failed! Check and make sure your RCON connection details in the configuration file are correct.");
-                    return;
-                }
-                Logging.WriteLine("RCON connected!");
+                await discordBot.ConnectAsync();
+            }
+            catch
+            {
+                throw new InvalidOperationException("Failed to connect to Discord bot. Check that your bot token is set correctly, or Discord is having an outage.");
+            }
+            Logging.WriteLine($"Discord bot '{discordBot.GetBotUsername()}' connected!");
 
-                Logging.WriteLine("Connecting to Discord bot...");
-                try
-                {
-                    await discordBot.ConnectAsync();
-                }
-                catch
-                {
-                    throw new InvalidOperationException("Failed to connect to Discord bot. Check that your bot token is set correctly, or Discord is having an outage.");
-                }
-                Logging.WriteLine($"Discord bot '{discordBot.GetBotUsername()}' connected!");
+            Logging.WriteLine("Tracker started. Press CTRL+C to stop and exit.");
 
-                Logging.WriteLine("Tracker started. Press CTRL+C to stop and exit.");
-
-                while (_tracking)
+            while (_tracking)
+            {
+                if (!_lastTrackingTime.HasValue
+                    || _lastTrackingTime.HasValue && _lastTrackingTime.Value.AddMilliseconds(trackerConfig.TrackerInterval) < DateTime.Now)
                 {
-                    if (!_lastTrackingTime.HasValue
-                        || _lastTrackingTime.HasValue && _lastTrackingTime.Value.AddMilliseconds(trackerConfig.TrackerInterval) < DateTime.Now)
+                    string output = GetDisplayStringByPattern(trackerConfig.TrackerDisplayPattern, 0, trackerConfig.TrackerMaxServerPlayers);
+
+                    try
                     {
-                        var players = await rcon.GetPlayerList();
-                        _lastTrackingTime = DateTime.Now;
-
-                        var output = GetDisplayStringByPattern(trackerConfig.TrackerDisplayPattern, players.Count, trackerConfig.TrackerMaxServerPlayers);
-                        Logging.WriteLine($"Tracker: {output}");
-                        await discordBot.SetActivity(output);
+                        using (var rcon = new EvrimaRconClient(trackerConfig.RconHost, trackerConfig.RconPort, trackerConfig.RconPassword, trackerConfig.RconTimeout))
+                        {
+                            if (await rcon.ConnectAsync())
+                            {
+                                var players = await rcon.GetPlayerList();
+                                _lastTrackingTime = DateTime.Now;
+                                output = GetDisplayStringByPattern(trackerConfig.TrackerDisplayPattern, players.Count, trackerConfig.TrackerMaxServerPlayers);
+                                Logging.WriteLine($"Tracker: {output}");
+                            }
+                            else
+                            {
+                                Logging.WriteLine($"RCON connection to {trackerConfig.RconHost}:{trackerConfig.RconPort} failed! Check and make sure your RCON connection details in the configuration file are correct.");
+                            }
+                        }
                     }
-
-                    await Task.Delay(1000);
+                    catch
+                    {
+                        Logging.WriteLine("Tracker: Connection lost, is the server offline?");
+                    }
+                    
+                    await discordBot.SetActivity(output);
                 }
+
+                await Task.Delay(1000);
             }
         }
 
