@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+    <Title>The Isle EVRIMA Player Tracker</Title>
+    <Authors>aerond</Authors>
+    <Product>$(Title)</Product>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="icon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Config.Net" Version="5.1.5" />
+    <PackageReference Include="DSharpPlus" Version="5.0.0-nightly-02132" />
+  </ItemGroup>
+
+</Project>
