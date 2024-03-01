@@ -11,8 +11,9 @@ This project is written in C# using .NET 8 and requires the .NET 8 runtime.
 1. First install the .NET 8 Desktop Runtime if you don't already have it.
 2. Download the latest release (or build the project yourself) and copy the application files wherever you want.
 3. Run the **TheIsleEvrimaPlayerTracker** executable for the first time, a default **config.ini** file will be created in the same directory.
-4. Configure the application's **config.ini** file. (see the [Configuration](#configuration) section for details)
-5. Run the executable again. If configured correctly, the application will run and start displaying the online players.
+4. Make sure your Evrima server has RCON set up.
+5. Configure the application's **config.ini** file. (see the [Configuration](#configuration) section for details)
+6. Run the executable again. If configured correctly, the application will run and start displaying the online players.
 
 # Enabling RCON on Evrima server
 To enable RCON on your The Isle Evrima server, open the `Game.ini` config file located in `...\Saved\Config\WindowsServer` and do the following.
