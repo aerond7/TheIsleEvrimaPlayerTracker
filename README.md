@@ -1,7 +1,10 @@
 # The Isle EVRIMA Player Tracker
-This is a tool to display and update current player count using a Discord bot's status for a The Isle Evrima server using RCON.
+This is a tool that displays a live player count using a Discord bot's status for a The Isle Evrima server using RCON.
 
 Licensed under MIT License.
+
+## Showcase
+![Showcase](/docs/end_result.png)
 
 # Pre-requisites
 This project is written in C# using .NET 8 and requires the .NET 8 runtime.
