@@ -32,6 +32,7 @@ RconPort=8888
 ```
 
 **NOTE**: Make sure the password and port are the same in both settings!
+
 Also make sure to open port `8888` (or the port you set in the settings) in **Firewall**!
 
 # Configuration
@@ -76,14 +77,19 @@ BotToken=your_bot_token_here
 
 ## Command line
 You can also configure the application using command line arguments.
+
 **Any specified command line configuration arguments will override the values set in the INI config file!**
 
 To configure a single value using a command line argument, simply specify an argument like this:
+
 `--Section.Value=your_desired_value`
+
 For example, to configure the Rcon Host value, use this argument:
+
 `--Rcon.Host=127.0.0.1`
 
 Here is a full example of running the application using a command line (PowerShell):
+
 `.\TheIsleEvrimaPlayerTracker.exe --Rcon.Host=127.0.0.1 --Tracker.Interval=15000`
 
 **Values that are not specified in the arguments will be set to the ones from the INI config file.**
@@ -98,5 +104,5 @@ These are special keywords that will be replaced in the display pattern with act
 | `{online}` | Replaced with the amount of players online on the server. |
 | `{max}` | Replaced with the maximum player cap on the server. (as per the `Tracker.MaxServerPlayers` value in the config) |
 
-## Examples
+## Other examples
 You can also omit any keywords from your display pattern, so for example if you set the display pattern to `{online} players`, the bot's status will be set to `0 players` if there are 0 players on the server.
