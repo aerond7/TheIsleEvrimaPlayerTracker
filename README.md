@@ -105,7 +105,7 @@ Here is a full example of running the application using a command line (PowerShe
 **Values that are not specified in the arguments will be set to the ones from the INI config file.**
 
 # Display pattern
-You can the specify display pattern that will be written to the Discord bot's status. The default display pattern is `{online} / {max}`, which will translate to `0 / 100` if there are 0 players on the server and the `Tracker.MaxServerPlayers` value is set to 100.
+You can specify the display pattern that will be written to the Discord bot's status. The default display pattern is `{online} / {max}`, which will translate to `0 / 100` if there are 0 players on the server and the `Tracker.MaxServerPlayers` value is set to 100.
 
 ## Keywords
 These are special keywords that will be replaced in the display pattern with actual values.
