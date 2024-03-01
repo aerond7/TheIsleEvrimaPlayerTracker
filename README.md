@@ -6,6 +6,7 @@ This project is written in C# using .NET 8 and requires the .NET 8 runtime.
 
  - .NET 8 Desktop Runtime (https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
  - Enabled RCON on your The Isle Evrima server
+ - A Discord bot and its token
 
 # Getting started
 1. First install the .NET 8 Desktop Runtime if you don't already have it.
@@ -35,6 +36,9 @@ RconPort=8888
 **NOTE**: Make sure the password and port are the same in both settings!
 
 Also make sure to open port `8888` (or the port you set in the settings) in **Firewall**!
+
+# Creating a Discord bot
+To create a Discord bot, obtaining its token and adding it to your Discord server, use [this guide from Discord itself](https://discord.com/developers/docs/getting-started#step-1-creating-an-app).
 
 # Configuration
 Before running, the application needs to be configured and given the correct connection details. There are two ways to configure the application.
