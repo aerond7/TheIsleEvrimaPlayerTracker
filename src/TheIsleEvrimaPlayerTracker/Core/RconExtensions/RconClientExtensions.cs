@@ -10,18 +10,22 @@ namespace TheIsleEvrimaPlayerTracker.Core.RconExtensions
             var result = new List<ServerPlayer>();
 
             var response = await client.SendCommandAsync(EvrimaCommand.PlayerList);
-            var lines = response.Replace(",", string.Empty)
-                                .Split("\n")
+            var lines = response.Split("\n")
                                 .Skip(1)
-                                .Where(x => !string.IsNullOrWhiteSpace(x))
+                                .ToArray();
+            var eosIds = lines[0].Split(',')
+                                 .Where(eos => !string.IsNullOrEmpty(eos))
+                                 .ToArray();
+            var names = lines[1].Split(',')
+                                .Where(name => !string.IsNullOrEmpty(name))
                                 .ToArray();
 
-            for (int i = 0; i < lines.Length; i = i + 2)
+            for (int i = 0; i < eosIds.Length; i++)
             {
                 result.Add(new ServerPlayer
                 {
-                    EosId = lines[i],
-                    PlayerName = lines[i + 1]
+                    EosId = eosIds[i],
+                    PlayerName = names[i]
                 });
             }
 
