@@ -11,7 +11,7 @@ This project is written in C# using .NET 8 and requires the .NET 8 runtime.
 1. First install the .NET 8 Desktop Runtime if you don't already have it.
 2. Download the latest release (or build the project yourself) and copy the application files wherever you want.
 3. Run the **TheIsleEvrimaPlayerTracker** executable for the first time, a default **config.ini** file will be created in the same directory.
-4. Configure the application's **config.ini** file. (see the Configuration section for details)
+4. Configure the application's **config.ini** file. (see the [Configuration](#configuration) section for details)
 5. Run the executable again. If configured correctly, the application will run and start displaying the online players.
 
 # Enabling RCON on Evrima server
@@ -67,7 +67,7 @@ BotToken=your_bot_token_here
 | --- | --- | --- |
 | Tracker.**Interval** | Specifies the interval in milliseconds between each update. Each update means a query to the server's RCON. (Minimum: 10000) | `30000` |
 | Tracker.**MaxServerPlayers** | The maximum amount of players that the Evrima server has configured. (only used for displaying) | `0` |
-| Tracker.**DisplayPattern** | This will be the output to the Discord bot's activity status. Special keys between {} parantheses will be replaced with actual values. (see Display pattern section for details) | `{online} / {max}` |
+| Tracker.**DisplayPattern** | This will be the output to the Discord bot's activity status. Special keys between {} parantheses will be replaced with actual values. (see [Display pattern](#display-pattern) section for details) | `{online} / {max}` |
 | Rcon.**Host** | The IP address of the server. Can be left at default value if the application will be running on the same machine as the Evrima server. | `127.0.0.1` |
 | Rcon.**Port** | The port that the Evrima server has RCON running on. | `8888` |
 | Rcon.**Password** | The password that is set for access to the Evrima RCON. | `-` |
